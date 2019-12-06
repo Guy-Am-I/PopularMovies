@@ -18,13 +18,10 @@ public class NetworkUtils {
     //create session
     //get json data from url
 
-    private static final String API_KEY = "********************";
+    private static final String API_KEY = "***************";
     private static final String BASE_MOVIES_URL = "https://api.themoviedb.org/3";
     private static final String POPULAR_ADD = "/movie/popular";
     private static final String TOP_RATED_ADD = "/movie/top_rated";
-
-    private static final String BASE_MOVIE_URL = "http://image.tmdb.org/t/p/";
-    private static final String IMAGE_SIZE = "w342";
 
     final static String API_QUERY = "api_key";
     //final static String
@@ -37,8 +34,8 @@ public class NetworkUtils {
      * @param sort Optional sort ability by "popular" or "topRated"
      * @return built URL to send request
      */
-    public static URL buildURL(String sort) {
-        //choose url based on populairty or top rateed
+    public static URL buildMoviesURL(String sort) {
+        //choose url based on populairty or top rated
         String parseUrl = BASE_MOVIES_URL;
         if (sort == "popular") {
             parseUrl = parseUrl + POPULAR_ADD;

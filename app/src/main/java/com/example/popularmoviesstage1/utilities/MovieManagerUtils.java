@@ -18,6 +18,7 @@ public class MovieManagerUtils {
 
     private final String TAG = "MovieManager";
 
+
     MainActivity callerActivity;
     String options = "";
     Movie[] movieData;
@@ -49,7 +50,7 @@ public class MovieManagerUtils {
             //callerActivity = (MainActivity) params[1];
 
             String options = (String) params[0]; //can be "topRated" or "popular"
-            URL moviesRequestUrl = NetworkUtils.buildURL(options);
+            URL moviesRequestUrl = NetworkUtils.buildMoviesURL(options);
             Log.d(TAG, "doInBackground: URL: " + moviesRequestUrl);
 
             try {

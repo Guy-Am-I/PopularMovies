@@ -18,6 +18,9 @@ import java.net.HttpURLConnection;
  */
 public class TheMovieDBJsonUtils {
     final static String TAG = "Movie JSON PARSER";
+    private static final String BASE_MOVIE_URL = "http://image.tmdb.org/t/p/";
+    private static final String POSTER_IMAGE_SIZE = "w342/";
+    private static final String BACKDROP_IMAGE_SIZE = "w500/";
 
     static String title, poster_path, backdrop_path, overview, releaseDate;
     static int id;
@@ -61,8 +64,8 @@ public class TheMovieDBJsonUtils {
 
     public static Movie getMovieFromObject(JSONObject movie) throws JSONException {
         title = movie.getString("original_title");
-        poster_path = movie.getString("poster_path");
-        backdrop_path = movie.getString("backdrop_path");
+        poster_path = BASE_MOVIE_URL + POSTER_IMAGE_SIZE + movie.getString("poster_path");
+        backdrop_path = BASE_MOVIE_URL + BACKDROP_IMAGE_SIZE + movie.getString("backdrop_path");
         id = movie.getInt("id");
         user_rating = movie.getDouble("vote_average");
         overview = movie.getString("overview");
