@@ -13,6 +13,7 @@ public class Movie {
     private String overview;
     private String releaseDate; //Make date object in future
 
+    public Movie(){}
 
     public Movie(String title, String poster_path, String backdrop_path, String overview, String releaseDate,
                  int id, double user_rating) {
