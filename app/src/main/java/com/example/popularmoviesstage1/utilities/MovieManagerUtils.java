@@ -56,7 +56,8 @@ public class MovieManagerUtils {
                 //parse JSON data from URL
                 String jsonMoviesResponse = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
                 Log.d(TAG, "doInBackground: JSON: " + jsonMoviesResponse);
-                return null;
+                Movie[] moviesArray = TheMovieDBJsonUtils.getMoviesFromJSON(callerActivity, jsonMoviesResponse);
+                return moviesArray;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -65,7 +66,7 @@ public class MovieManagerUtils {
 
         @Override
         protected void onPostExecute(Movie[] moviesData) {
-            callerActivity.finishedLoadingMovies();
+            callerActivity.finishedLoadingMovies(moviesData);
             movieData = moviesData;
 
         }

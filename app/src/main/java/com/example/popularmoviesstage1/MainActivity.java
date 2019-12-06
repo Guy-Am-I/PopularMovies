@@ -41,20 +41,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getMovieData() {
-        //show recyler view and hide error view
+        //show recycler view and hide error view
         String options = "popular";
         // String options =  <Get options from user preference in view button/text view>
         //MovieManagerUtils.FetchMoviesTask fetchMoviesTask = new MovieManagerUtils.FetchMoviesTask();
         MovieManagerUtils manager = new MovieManagerUtils(this);
         manager.setOptions(options);
-        Movie[] data = manager.executeFetchAsyncTask();
+        manager.executeFetchAsyncTask();
 
 
     }
-    public static void loadingMovies() {
+    public void loadingMovies() {
         //set loading indicator view to visible
     }
-    public static void finishedLoadingMovies() {
-
+    public void finishedLoadingMovies(Movie[] moviesArray) {
+        if(moviesArray != null) {
+            //show recycler hide error
+            mMovieAdapter.setMoviesData(moviesArray);
+        } //otherwise show error message
     }
 }

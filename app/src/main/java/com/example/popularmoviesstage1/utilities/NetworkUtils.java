@@ -18,7 +18,7 @@ public class NetworkUtils {
     //create session
     //get json data from url
 
-    private static final String API_KEY = "*****************";
+    private static final String API_KEY = "********************";
     private static final String BASE_MOVIES_URL = "https://api.themoviedb.org/3";
     private static final String POPULAR_ADD = "/movie/popular";
     private static final String TOP_RATED_ADD = "/movie/top_rated";

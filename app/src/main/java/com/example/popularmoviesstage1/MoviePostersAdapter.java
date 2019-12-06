@@ -15,13 +15,16 @@ import com.example.popularmoviesstage1.data.Movie;
 //adapter to handle the recylcler view
 public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapter.MoviePostersViewHolder> {
 
-    private final String TAG = "MoviePostesAdapter";
-    private int nummovies = 0;
+    private final String TAG = "MoviePostersAdapter";
     private Movie[] movies;
 
     public MoviePostersAdapter() {
     }
 
+    public void setMoviesData(Movie[] moviesData) {
+        this.movies = moviesData;
+        notifyDataSetChanged();
+    }
 
     //view holder to handle each child element of the recycleView
     public class MoviePostersViewHolder extends RecyclerView.ViewHolder {
@@ -32,8 +35,6 @@ public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapte
             super(view);
 
             mMovieTitleTV = (TextView) view.findViewById(R.id.movie_card_title);
-
-
         }
     }
 
@@ -51,7 +52,8 @@ public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MoviePostersViewHolder holder, int position) {
-
+        //populate view with Movie object
+        holder.mMovieTitleTV.setText(movies[position].getTitle());
     }
 
     @Override
