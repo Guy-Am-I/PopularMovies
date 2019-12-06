@@ -40,7 +40,6 @@ public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapte
     @NonNull
     @Override
     public MoviePostersAdapter.MoviePostersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: initializing view holder");
         //inflate layout
         Context context = parent.getContext();
         int layoutID = R.layout.movie_list_item;
