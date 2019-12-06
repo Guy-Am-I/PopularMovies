@@ -1,16 +1,20 @@
 package com.example.popularmoviesstage1;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.popularmoviesstage1.data.Movie;
+import com.squareup.picasso.Picasso;
+
 
 //adapter to handle the recylcler view
 public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapter.MoviePostersViewHolder> {
@@ -30,11 +34,13 @@ public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapte
     public class MoviePostersViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mMovieTitleTV;
+        private ImageView mPosterImageView;
 
         public MoviePostersViewHolder(View view) {
             super(view);
 
-            mMovieTitleTV = (TextView) view.findViewById(R.id.movie_card_title);
+            mMovieTitleTV = view.findViewById(R.id.movie_card_title);
+            mPosterImageView = view.findViewById(R.id.poster_image);
         }
     }
 
@@ -54,6 +60,7 @@ public class MoviePostersAdapter extends RecyclerView.Adapter<MoviePostersAdapte
     public void onBindViewHolder(@NonNull MoviePostersViewHolder holder, int position) {
         //populate view with Movie object
         holder.mMovieTitleTV.setText(movies[position].getTitle());
+        Picasso.get().load(movies[position].getBackdrop_path()).into(holder.mPosterImageView);
     }
 
     @Override
