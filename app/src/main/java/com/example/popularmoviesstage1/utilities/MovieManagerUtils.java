@@ -17,15 +17,27 @@ import java.net.URL;
 public class MovieManagerUtils {
 
     private final String TAG = "MovieManager";
+    private final MovieAdapterrOnClickHandler mOnClickHandler;
+
+    public interface MovieAdapterrOnClickHandler {
+        void onClick(Movie movieClicked);
+    }
 
 
     MainActivity callerActivity;
     int options;
     Movie[] movieData;
 
-    public MovieManagerUtils(Context context) {
+    /**
+     *
+     * @param context context for the adapter to be able to execute fetchAsyncTask
+     * @param clickHandler on click handler for this adapter, when movie item is clicked
+     */
+    public MovieManagerUtils(Context context,MovieAdapterrOnClickHandler clickHandler) {
         callerActivity = (MainActivity) context;
+        mOnClickHandler = clickHandler;
     }
+
     public void setOptions(int options) {
         this.options = options;
     }
