@@ -3,10 +3,14 @@ package com.example.popularmoviesstage1.utilities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.example.popularmoviesstage1.MainActivity;
+import com.example.popularmoviesstage1.MovieDetailActivity;
+import com.example.popularmoviesstage1.MoviePostersAdapter;
 import com.example.popularmoviesstage1.data.Movie;
 
 import java.net.URL;
@@ -14,28 +18,24 @@ import java.net.URL;
 /**
  * Class for managing operations regarding movies
  */
-public class MovieManagerUtils {
+public class MovieManagerUtils implements MoviePostersAdapter.MovieAdapterOnClickHandler{
 
     private final String TAG = "MovieManager";
-    private final MovieAdapterrOnClickHandler mOnClickHandler;
 
-    public interface MovieAdapterrOnClickHandler {
-        void onClick(Movie movieClicked);
+    private MainActivity callerActivity;
+    private int options;
+    private Movie[] movieData;
+    private MoviePostersAdapter mMovieAdapter;
+
+
+    public MovieManagerUtils(Context context) {
+        callerActivity = (MainActivity) context;
+        mMovieAdapter = new MoviePostersAdapter(this);
+
     }
 
-
-    MainActivity callerActivity;
-    int options;
-    Movie[] movieData;
-
-    /**
-     *
-     * @param context context for the adapter to be able to execute fetchAsyncTask
-     * @param clickHandler on click handler for this adapter, when movie item is clicked
-     */
-    public MovieManagerUtils(Context context,MovieAdapterrOnClickHandler clickHandler) {
-        callerActivity = (MainActivity) context;
-        mOnClickHandler = clickHandler;
+    public MoviePostersAdapter getMovieAdapter() {
+        return this.mMovieAdapter;
     }
 
     public void setOptions(int options) {
@@ -48,7 +48,7 @@ public class MovieManagerUtils {
     }
 
 
-    public class FetchMoviesTask extends AsyncTask<Integer, Boolean, Movie[]> {
+    public class FetchMoviesTask extends AsyncTask<Integer, Boolean, Movie[]>  {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,4 +84,24 @@ public class MovieManagerUtils {
         }
     }
 
+    @Override
+    public void onClick(Movie movieClicked) {
+        //create intent
+        Class destinationActivity = MovieDetailActivity.class;
+        Intent goToMovieDetail = new Intent(callerActivity, destinationActivity);
+
+        //movie details as string - CHANGE IN FUTURE
+        //0 - title, 1 - release date, 2-user rating, 3- poster path, 5 - overview
+        String[] movieDetails = new String[5];
+        movieDetails[0] = movieClicked.getTitle();
+        movieDetails[1] = movieClicked.getReleaseDate();
+        movieDetails[2] = "" + movieClicked.getUser_rating();
+        movieDetails[3] = movieClicked.getPoster_path();
+        movieDetails[4] = movieClicked.getOverview();
+
+        goToMovieDetail.putExtra(Intent.EXTRA_TEXT, movieDetails);
+
+        callerActivity.startIntent(goToMovieDetail);
+
+    }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,7 +18,8 @@ import com.example.popularmoviesstage1.utilities.MovieManagerUtils;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private MoviePostersAdapter mMovieAdapter;
+    private MoviePostersAdapter mAdapter;
+    private MovieManagerUtils manager;
 
     
 
@@ -27,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.movies_rv);
+        manager = new MovieManagerUtils(this);
 
         //initiazlise Recycler view
         //set layout manager, set fixed size, set adapter
-        mMovieAdapter = new MoviePostersAdapter();
-
-        mRecyclerView.setAdapter(mMovieAdapter);
+        mAdapter = manager.getMovieAdapter();
+        mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
@@ -45,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getMovieData(Integer option_id) {
-        //MovieManagerUtils.FetchMoviesTask fetchMoviesTask = new MovieManagerUtils.FetchMoviesTask();
-        MovieManagerUtils manager = new MovieManagerUtils(this);
         manager.setOptions(option_id);
         manager.executeFetchAsyncTask();
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void finishedLoadingMovies(Movie[] moviesArray) {
         if(moviesArray != null) {
             //show recycler hide error
-            mMovieAdapter.setMoviesData(moviesArray);
+            mAdapter.setMoviesData(moviesArray);
         } //otherwise show error message
     }
 
@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (itemID) {
             case R.id.sort_top_rated:
-                mMovieAdapter.setMoviesData(null);
+                mAdapter.setMoviesData(null);
                 getMovieData(R.string.top_rated_url);
                 return true;
             case R.id.sort_most_popular:
-                mMovieAdapter.setMoviesData(null);
+                mAdapter.setMoviesData(null);
                 getMovieData(R.string.most_popular_url);
                 return true;
             default:
@@ -90,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    public void startIntent(Intent goToIntent) {
+        startActivity(goToIntent);
     }
 }
