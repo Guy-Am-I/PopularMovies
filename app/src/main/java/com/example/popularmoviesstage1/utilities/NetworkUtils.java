@@ -3,6 +3,8 @@ package com.example.popularmoviesstage1.utilities;
 
 import android.net.Uri;
 
+import com.example.popularmoviesstage1.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -18,7 +20,7 @@ public class NetworkUtils {
     //create session
     //get json data from url
 
-    private static final String API_KEY = "*****************";
+    private static final String API_KEY = "*********";
     private static final String BASE_MOVIES_URL = "https://api.themoviedb.org/3";
     private static final String POPULAR_ADD = "/movie/popular";
     private static final String TOP_RATED_ADD = "/movie/top_rated";
@@ -34,13 +36,13 @@ public class NetworkUtils {
      * @param sort Optional sort ability by "popular" or "topRated"
      * @return built URL to send request
      */
-    public static URL buildMoviesURL(String sort) {
+    public static URL buildMoviesURL(int sort) {
         //choose url based on populairty or top rated
         String parseUrl = BASE_MOVIES_URL;
-        if (sort == "popular") {
+        if (sort == R.string.most_popular_url) {
             parseUrl = parseUrl + POPULAR_ADD;
         }
-        else if (sort == "topRated") {
+        else if (sort == R.string.top_rated_url) {
             parseUrl = parseUrl + TOP_RATED_ADD;
         }
 

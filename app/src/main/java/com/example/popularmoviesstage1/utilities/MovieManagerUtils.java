@@ -20,13 +20,13 @@ public class MovieManagerUtils {
 
 
     MainActivity callerActivity;
-    String options = "";
+    int options;
     Movie[] movieData;
 
     public MovieManagerUtils(Context context) {
         callerActivity = (MainActivity) context;
     }
-    public void setOptions(String options) {
+    public void setOptions(int options) {
         this.options = options;
     }
 
@@ -36,7 +36,7 @@ public class MovieManagerUtils {
     }
 
 
-    public class FetchMoviesTask extends AsyncTask<String, Boolean, Movie[]> {
+    public class FetchMoviesTask extends AsyncTask<Integer, Boolean, Movie[]> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -44,13 +44,12 @@ public class MovieManagerUtils {
         }
 
         @Override
-        protected Movie[] doInBackground(String... params) {
+        protected Movie[] doInBackground(Integer... params) {
 
             if (params.length == 0) return  null;
             //callerActivity = (MainActivity) params[1];
 
-            String options = (String) params[0]; //can be "topRated" or "popular"
-            URL moviesRequestUrl = NetworkUtils.buildMoviesURL(options);
+            URL moviesRequestUrl = NetworkUtils.buildMoviesURL(params[0]);
             Log.d(TAG, "doInBackground: URL: " + moviesRequestUrl);
 
             try {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movie_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="1dp"
@@ -7,6 +8,7 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
+
         android:id="@+id/poster_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,20 +20,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/movie_backdrop_image"
-        android:alpha="0.2"/>
-
+        android:alpha="0.25"/>
 
     <TextView
         android:id="@+id/movie_card_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
 
         android:textStyle="bold"
         android:fontFamily="cursive"
-        android:textSize="28sp" />
-
+        android:textSize="35sp" />
 
 </androidx.cardview.widget.CardView>
