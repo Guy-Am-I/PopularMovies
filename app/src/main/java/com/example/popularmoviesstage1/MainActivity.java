@@ -91,8 +91,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-
-    public void startIntent(Intent goToIntent) {
-        startActivity(goToIntent);
-    }
 }

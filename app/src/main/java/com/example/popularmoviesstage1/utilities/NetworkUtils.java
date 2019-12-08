@@ -2,6 +2,7 @@ package com.example.popularmoviesstage1.utilities;
 
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.popularmoviesstage1.R;
 
@@ -20,7 +21,7 @@ public class NetworkUtils {
     //create session
     //get json data from url
 
-    private static final String API_KEY = "*******";
+    private static final String API_KEY = "********";
     private static final String BASE_MOVIES_URL = "https://api.themoviedb.org/3";
     private static final String POPULAR_ADD = "/movie/popular";
     private static final String TOP_RATED_ADD = "/movie/top_rated";
@@ -40,6 +41,7 @@ public class NetworkUtils {
         //choose url based on populairty or top rated
         String parseUrl = BASE_MOVIES_URL;
         if (sort == R.string.most_popular_url) {
+            Log.d("Most Popular", "buildMoviesURL: ");
             parseUrl = parseUrl + POPULAR_ADD;
         }
         else if (sort == R.string.top_rated_url) {
@@ -80,8 +82,10 @@ public class NetworkUtils {
 
             boolean hasInput = scanner.hasNext();
             if(hasInput) {
+                Log.d("URL Error", "getResponseFromHttpUrl: proper scanner");
                 return scanner.next();
             } else {
+                Log.d("URL Error", "getResponseFromHttpUrl: null scanner");
                 return null;
             }
         } finally {

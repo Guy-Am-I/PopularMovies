@@ -101,7 +101,7 @@ public class MovieManagerUtils implements MoviePostersAdapter.MovieAdapterOnClic
 
         goToMovieDetail.putExtra(Intent.EXTRA_TEXT, movieDetails);
 
-        callerActivity.startIntent(goToMovieDetail);
+        callerActivity.startActivity(goToMovieDetail);
 
     }
 }
